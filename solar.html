@@ -5,28 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar Energy Calculator</title>
     <style>
-        /* styles.css */
-        body {
+        /* Set the video to cover the entire background */
+        body, html {
+            height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
             color: white;
-            background: linear-gradient(135deg, #1a73e8, #1e1e1e);
-            animation: gradient 5s ease infinite;
         }
 
-        @keyframes gradient {
-            0% { background: #1a73e8; }
-            50% { background: #1e1e1e; }
-            100% { background: #1a73e8; }
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100vw;
+            min-height: 100vh;
+            z-index: -1; /* Ensures the video is behind all content */
+            object-fit: cover; /* Ensures the video covers the screen */
         }
 
         .container {
             max-width: 600px;
             margin: auto;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5); /* Partially transparent background for readability */
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1; /* Ensures content is above the video */
         }
 
         h1 {
@@ -68,6 +73,14 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop>
+        <source src="C:\Users\jeeva\Downloads\Galaxy Motion Background Video [HD] ~ FREE.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Content overlay -->
     <div class="container">
         <h1>Solar Energy Calculator</h1>
         <form id="solar-form">
@@ -89,8 +102,8 @@
         <canvas id="outputChart"></canvas>
         <div id="results"></div>
     </div>
+
     <script>
-        // script.js
         document.getElementById('solar-form').addEventListener('submit', function (e) {
             e.preventDefault();
             
@@ -136,7 +149,23 @@
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: 'Energy Output (kWh)'
+                                text: 'Energy Output (kWh)',
+                                color: 'white' // Set title color to white
+                            },
+                            ticks: {
+                                color: 'white' // Set y-axis text color to white
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: 'white' // Set x-axis text color to white
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'white' // Set legend text color to white
                             }
                         }
                     }
@@ -146,3 +175,5 @@
     </script>
 </body>
 </html>
+
+
